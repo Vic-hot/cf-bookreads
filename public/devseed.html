@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>dev seed</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23A5402D'/%3E%3C/text%3E%3C/svg%3E"></head>
+<body>
+<pre id="out">seeding…</pre>
+<script src="js/db.js"></script>
+<script src="js/book.js"></script>
+<script>
+(async function () {
+  var out = document.getElementById('out');
+  var params = new URLSearchParams(location.search);
+  var lines = [];
+  try {
+    if (params.get('theme')) { localStorage.setItem('pl_theme', params.get('theme')); lines.push('theme=' + params.get('theme')); }
+    if (params.get('font')) { localStorage.setItem('pl_font', params.get('font')); }
+    if (params.get('serif') === '0') { localStorage.setItem('pl_serif', '0'); }
+    if (params.get('seed') !== '0') {
+      var files = ['mockdata/sample.epub', 'mockdata/sample.txt', 'mockdata/sample-gbk.txt'];
+      for (var i = 0; i < files.length; i++) {
+        var res = await fetch('/' + files[i]);
+        var blob = await res.blob();
+        var f = new File([blob], files[i].split('/').pop(), { type: blob.type });
+        var rec = await LibBook.importFile(f);
+        lines.push('seeded ' + f.name + ' -> ' + rec.id + ' 《' + rec.title + '》' + (rec.author ? '/' + rec.author : ''));
+      }
+    }
+    out.textContent = 'SEEDED-OK\n' + lines.join('\n');
+    document.title = 'SEEDED-OK';
+  } catch (e) {
+    out.textContent = 'SEED-FAIL: ' + (e && e.message || e);
+    document.title = 'SEED-FAIL';
+  }
+})();
+</script>
+</body>
+</html>

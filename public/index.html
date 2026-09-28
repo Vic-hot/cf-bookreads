@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>藏书房 · 私人电子书阅读</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23A5402D'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' font-family='serif' font-weight='bold' fill='%23F8F3E9'%3E藏%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="paper">
+
+<header class="site-header">
+  <div class="brand">
+    <span class="seal">藏</span>
+    <div>
+      <h1>藏书房</h1>
+      <p class="sub">本地书 · 在线读 · 不上传不存储</p>
+    </div>
+  </div>
+  <div class="header-tools">
+    <input type="search" id="search" class="search" placeholder="搜索书名、作者…" autocomplete="off">
+    <label class="btn btn-accent" for="import-input" tabindex="0">导入书籍</label>
+    <input type="file" id="import-input" class="file-input" accept=".epub,.txt" multiple>
+  </div>
+</header>
+
+<main>
+  <section id="grid" class="grid" hidden></section>
+
+  <section id="empty" class="empty">
+    <div class="empty-seal">虚</div>
+    <h2>书架尚空</h2>
+    <p>把 EPUB 或 TXT 文件拖进页面，或点击右上角「导入书籍」。<br>
+    书籍只在本机浏览器中解析阅读，不会上传到任何服务器。</p>
+  </section>
+</main>
+
+<footer class="site-footer">书籍与阅读进度保存在本机浏览器（IndexedDB / localStorage）· 清除浏览器数据或更换设备后需重新导入</footer>
+
+<div id="drop-hint" class="drop-hint" aria-hidden="true">松手导入 · 仅在本机读取</div>
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/db.js"></script>
+<script src="js/book.js"></script>
+<script src="js/shelf.js"></script>
+</body>
+</html>

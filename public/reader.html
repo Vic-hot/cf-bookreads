@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阅读 · 藏书房</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23A5402D'/%3E%3Ctext x='32' y='45' font-size='36' text-anchor='middle' font-family='serif' font-weight='bold' fill='%23F8F3E9'%3E藏%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="paper">
+
+<!-- 打开文件 / 说明浮层 -->
+<div id="gate" class="reader-gate" hidden>
+  <div class="gate-card">
+    <span class="seal seal-sm">读</span>
+    <h2 id="gate-title">打开书籍</h2>
+    <p id="gate-text">请选择要阅读的文件</p>
+    <label class="btn btn-accent" for="gate-file">选择文件</label>
+    <a class="btn" href="index.html" style="margin-left:8px">返回书架</a>
+    <input type="file" id="gate-file" class="file-input" accept=".epub,.txt">
+  </div>
+</div>
+
+<header id="topbar" class="topbar">
+  <div class="tb-left">
+    <a class="tb-btn" id="back-btn" href="index.html" title="返回书架" aria-label="返回书架">
+      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+    </a>
+    <div class="tb-info">
+      <strong id="tb-title">藏书房</strong>
+      <span id="tb-sub"></span>
+    </div>
+  </div>
+  <div class="tb-right">
+    <button class="tb-btn" id="toc-btn" title="目录">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+    <div class="tb-group">
+      <button class="tb-btn" id="font-minus" title="缩小字号">A－</button>
+      <button class="tb-btn" id="font-plus" title="放大字号">A＋</button>
+    </div>
+    <button class="tb-btn" id="font-toggle" title="宋体 / 黑体">宋</button>
+    <button class="tb-btn" id="theme-btn" title="切换主题（纸 / 杏 / 夜）">夜</button>
+    <span class="tb-pct" id="tb-pct">0%</span>
+  </div>
+</header>
+
+<aside id="toc-drawer" class="toc-drawer" aria-label="目录">
+  <div class="toc-head">目录
+    <button class="tb-btn" id="toc-close" title="关闭" aria-label="关闭目录">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <ul id="toc-list"></ul>
+</aside>
+
+<div id="viewer" class="epub-view" hidden></div>
+<div id="txt-view" class="txt-view" hidden><div class="txt-inner" id="txt-inner"></div></div>
+
+<button id="nav-prev" class="edge edge-prev" title="上一页" hidden>‹</button>
+<button id="nav-next" class="edge edge-next" title="下一页" hidden>›</button>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="js/db.js"></script>
+<script src="js/book.js"></script>
+<script src="js/reader.js"></script>
+</body>
+</html>
